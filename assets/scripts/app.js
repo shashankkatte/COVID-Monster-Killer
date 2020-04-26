@@ -10,6 +10,12 @@ let hasBonusflife = true;
 
 adjustHealthBars(chosenMaxLife);
 
+function reset() {
+  currentMonsterHealth = chosenMaxLife;
+  currentPlayerHealth = chosenMaxLife;
+  resetGame(chosenMaxLife);
+}
+
 function endRound() {
   const initialPlayerHealth = currentPlayerHealth;
   const playerDamage = dealPlayerDamage(MONSTER_ATTACK_VALUE);
@@ -18,7 +24,7 @@ function endRound() {
   if (currentPlayerHealth <= 0 && hasBonusflife) {
     hasBonusflife = false;
     removeBonusLife();
-    currentPlayerHealth = initialPlayerHealth
+    currentPlayerHealth = initialPlayerHealth;
     alert('You would be dead but bonus life of washing hands saved you!');
     setPlayerHealth(initialPlayerHealth);
   }
@@ -29,6 +35,10 @@ function endRound() {
     alert('You Lost!');
   } else if (currentPlayerHealth <= 0 && CurrentMonsterHealth <= 0) {
     alert('You have a draw!');
+  }
+
+  if (currentMonsterHealth <= 0 || currentPlayerHealth <= 0) {
+    reset();
   }
 }
 
